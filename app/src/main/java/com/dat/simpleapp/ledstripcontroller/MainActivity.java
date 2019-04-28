@@ -33,10 +33,21 @@ public class MainActivity extends AppCompatActivity {
     BluetoothConnectionService mBluetoothConnectionService;
     private ArrayList<BluetoothDevice> arrayPairedDevices;
 
+    Mode staticMode;
+    Mode dynamicMode;
+    Mode timerMode;
+    Mode alarmMode;
+    Mode climateMode;
+
     private int mDefaultStripSize = 30;
     private int mStripSize;
-    public static final String MY_PREFS_FILE = "MyPfresFile";
-    public static final String STRIP_SIZE = "StripSize";
+    public static final String MY_PREFS_FILE = "My_Preferences_File";
+    public static final String STRIP_SIZE = "Strip_Size";
+    public static final String BUNDLE_STATIC = "Bundle_Static";
+    public static final String BUNDLE_DYNAMIC = "Bundle_Dynamic";
+    public static final String BUNDLE_ALARM = "Bundle_Alarm";
+    public static final String BUNDLE_TIMER = "Bundle_Timer";
+    public static final String BUNDLE_CLIMATE = "Bundle_Climate";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         //Strip size with SharedPreferences
         SharedPreferences stripSize = getSharedPreferences(MY_PREFS_FILE, Context.MODE_PRIVATE);
         mStripSize = stripSize.getInt(STRIP_SIZE, mDefaultStripSize);
+
+        setupModes(savedInstanceState);
     }
 
     @Override
@@ -255,5 +268,88 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).create();
         alertDialog.show();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putByteArray(BUNDLE_STATIC, staticMode.getBytes());
+        outState.putByteArray(BUNDLE_DYNAMIC, dynamicMode.getBytes());
+        outState.putByteArray(BUNDLE_ALARM, alarmMode.getBytes());
+        outState.putByteArray(BUNDLE_TIMER, timerMode.getBytes());
+        outState.putByteArray(BUNDLE_CLIMATE, climateMode.getBytes());
+    }
+
+    private void setupModes(Bundle savedInstanceState) {
+        //Define the default values for each mode
+        byte[] bytesStatic = new byte[16];
+        byte[] bytesDynamic = new byte[16];
+        byte[] bytesAlarm = new byte[16];
+        byte[] bytesTimer = new byte[16];
+        byte[] bytesClimate = new byte[16];
+
+        if (savedInstanceState != null) {
+            bytesStatic = savedInstanceState.getByteArray(BUNDLE_STATIC);
+            bytesDynamic = savedInstanceState.getByteArray(BUNDLE_DYNAMIC);
+            bytesAlarm = savedInstanceState.getByteArray(BUNDLE_ALARM);
+            bytesTimer = savedInstanceState.getByteArray(BUNDLE_TIMER);
+            bytesClimate = savedInstanceState.getByteArray(BUNDLE_CLIMATE);
+        } else {
+            //Static mode
+            bytesStatic[0] = (byte) 1;             // Mode static
+            bytesStatic[1] = (byte) 255;           // Bright 0-255
+            bytesStatic[2] = (byte) 1;             // Start Position 1-stripSize
+            bytesStatic[3] = (byte) mStripSize;    // End Position 1-stripSize
+            bytesStatic[4] = (byte) 0;             // Red 0-255
+            bytesStatic[5] = (byte) 0;             // Green 0-255
+            bytesStatic[6] = (byte) 0;             // Blue 0-255
+            bytesStatic[15] = (byte) mStripSize;   // Strip Size
+
+            // Dynamic Mode
+            bytesDynamic[0] = (byte) 2;             // Mode dynamic
+            bytesDynamic[1] = (byte) 255;           // Bright 0-255
+            bytesDynamic[2] = (byte) 176;           // Speed 0-255
+            bytesDynamic[3] = (byte) 0;             // Wave type 0-6
+            bytesDynamic[4] = (byte) 255;           // Width 0-255
+            bytesDynamic[5] = (byte) 0;             // Inverted 0-1 (boolean)
+            bytesDynamic[6] = (byte) 0;             // Red 0-255
+            bytesDynamic[7] = (byte) 0;             // Green 0-255
+            bytesDynamic[8] = (byte) 0;             // Blue 0-255
+            bytesDynamic[15] = (byte) mStripSize;   // Strip Size
+
+            // Alarm Mode
+            bytesAlarm[0] = (byte) 4;             // Mode alarm
+            bytesAlarm[1] = (byte) 255;           // Bright 0-255
+            bytesAlarm[2] = (byte) 0;             // Current hour 0-23
+            bytesAlarm[3] = (byte) 0;             // Current minute 0-59
+            bytesAlarm[4] = (byte) 0;             // Current second 0-59
+            bytesAlarm[5] = (byte) 0;             // Alarm hour 0-23
+            bytesAlarm[6] = (byte) 0;             // Alarm minute 0-59
+            bytesAlarm[7] = (byte) 0;             // Lighting time
+            bytesAlarm[8] = (byte) 255;           // Red 0-255
+            bytesAlarm[9] = (byte) 255;           // Green 0-255
+            bytesAlarm[10] = (byte) 255;          // Blue 0-255
+            bytesAlarm[15] = (byte) mStripSize;   // Strip Size
+
+            // Timer Mode
+            bytesTimer[0] = (byte) 5;             // Mode alarm
+            bytesTimer[1] = (byte) 255;           // Bright 0-255
+            bytesTimer[2] = (byte) 0;             // Hours 0-99
+            bytesTimer[3] = (byte) 1;             // Minutes 0-59
+            bytesTimer[4] = (byte) 0;             // Seconds 0-59
+            bytesTimer[5] = (byte) 0;             // Pause 0-1
+            bytesTimer[15] = (byte) mStripSize;   // Strip Size
+
+            // Climate Mode
+            bytesClimate[0] = (byte) 3;             // Mode alarm
+            bytesClimate[1] = (byte) 0;             // Climate type 0-8
+            bytesClimate[15] = (byte) mStripSize;   // Strip Size
+        }
+
+        staticMode = new Mode(bytesStatic, mBluetoothConnectionService);
+        dynamicMode = new Mode(bytesDynamic, mBluetoothConnectionService);
+        alarmMode = new Mode(bytesAlarm, mBluetoothConnectionService);
+        timerMode = new Mode(bytesTimer, mBluetoothConnectionService);
+        climateMode = new Mode(bytesClimate, mBluetoothConnectionService);
     }
 }

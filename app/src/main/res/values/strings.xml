@@ -7,4 +7,8 @@
     <string name="btlistener_connection_lost">Connection Lost</string>
     <string name="dialog_select_one">Select One</string>
     <string name="dialog_uuid_not_available">UUIDs not available</string>
+    <string name="dialog_strip_size_title">Select the size of the Strip</string>
+    <string name="dialog_strip_size_ok">OK</string>
+    <string name="dialog_strip_size_cancel">Cancel</string>
+    <string name="strip_size_updated">Strip size updated</string>
 </resources>

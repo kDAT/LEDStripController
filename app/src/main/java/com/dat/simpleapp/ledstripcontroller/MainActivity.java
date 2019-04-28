@@ -7,13 +7,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.ParcelUuid;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,8 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
     BluetoothAdapter mBluetoothAdapter;
     BluetoothConnectionService mBluetoothConnectionService;
-
     private ArrayList<BluetoothDevice> arrayPairedDevices;
+
+    private int mDefaultStripSize = 30;
+    private int mStripSize;
+    public static final String MY_PREFS_FILE = "MyPfresFile";
+    public static final String STRIP_SIZE = "StripSize";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +52,13 @@ public class MainActivity extends AppCompatActivity {
         //Sets a BroadcastReceiver for checking if Bluetooth is On or Off
         IntentFilter BTOnOff = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         registerReceiver(mBluetoothStateChange, BTOnOff);
-
         //BluetoothConnectionService
         mBluetoothConnectionService = new BluetoothConnectionService();
         setBluetoothConnectionServiceListeners();
+
+        //Strip size with SharedPreferences
+        SharedPreferences stripSize = getSharedPreferences(MY_PREFS_FILE, Context.MODE_PRIVATE);
+        mStripSize = stripSize.getInt(STRIP_SIZE, mDefaultStripSize);
     }
 
     @Override
@@ -213,6 +224,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateStripSize() {
         // Updates the strip size
-        // TODO
+        final SharedPreferences stripSize = getSharedPreferences(MY_PREFS_FILE, Context.MODE_PRIVATE);
+        mStripSize = stripSize.getInt(STRIP_SIZE, mDefaultStripSize);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.number_picker, null);
+        final NumberPicker numberPicker = view.findViewById(R.id.strip_size_picker);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(256);
+        numberPicker.setValue(mStripSize);
+        numberPicker.setOrientation(NumberPicker.HORIZONTAL);
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.dialog_strip_size_title))
+                .setView(view)
+                .setPositiveButton(getString(R.string.dialog_strip_size_ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //OK
+                        mStripSize = (byte) numberPicker.getValue();
+                        SharedPreferences.Editor editor = stripSize.edit();
+                        editor.putInt(STRIP_SIZE, numberPicker.getValue());
+                        editor.apply();
+                        Toast.makeText(MainActivity.this, R.string.strip_size_updated, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(getString(R.string.dialog_strip_size_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cancel
+                    }
+                }).create();
+        alertDialog.show();
     }
 }

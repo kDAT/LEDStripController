@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/bluetooth_item"
+        android:title="@string/item_bluetooth"
+        android:icon="@drawable/ic_bluetooth_disabled_white_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/stripSize_item"
+        android:title="@string/item_strip_size"
+        android:icon="@drawable/ic_settings_ethernet_white_24dp"
+        app:showAsAction="ifRoom"/>
+
+</menu>

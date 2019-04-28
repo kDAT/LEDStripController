@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LED Strip Controller</string>
+    <string name="item_bluetooth">Bluetooth</string>
+    <string name="item_strip_size">Strip Size</string>
+    <string name="btlistener_connected_to">Connected to</string>
+    <string name="btlistener_connection_failed">Connection Failed</string>
+    <string name="btlistener_connection_lost">Connection Lost</string>
+    <string name="dialog_select_one">Select One</string>
+    <string name="dialog_uuid_not_available">UUIDs not available</string>
 </resources>

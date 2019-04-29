@@ -9,9 +9,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.ParcelUuid;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String BUNDLE_TIMER = "Bundle_Timer";
     public static final String BUNDLE_CLIMATE = "Bundle_Climate";
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +81,20 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences stripSize = getSharedPreferences(MY_PREFS_FILE, Context.MODE_PRIVATE);
         mStripSize = stripSize.getInt(STRIP_SIZE, mDefaultStripSize);
 
+        // Creates the objects of each mode
         setupModes(savedInstanceState);
+
+        // Sets up the navigationDrawer
+        setupNavigationDrawer(savedInstanceState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -254,9 +277,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //OK
-                        mStripSize = (byte) numberPicker.getValue();
+                        mStripSize = numberPicker.getValue();
                         SharedPreferences.Editor editor = stripSize.edit();
-                        editor.putInt(STRIP_SIZE, numberPicker.getValue());
+                        editor.putInt(STRIP_SIZE, mStripSize);
                         editor.apply();
                         Toast.makeText(MainActivity.this, R.string.strip_size_updated, Toast.LENGTH_SHORT).show();
                     }
@@ -351,5 +374,62 @@ public class MainActivity extends AppCompatActivity {
         alarmMode = new Mode(bytesAlarm, mBluetoothConnectionService);
         timerMode = new Mode(bytesTimer, mBluetoothConnectionService);
         climateMode = new Mode(bytesClimate, mBluetoothConnectionService);
+    }
+
+    /**
+     * Navigation Drawer stuff
+     */
+    private void setupNavigationDrawer(Bundle savedInstanceState) {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                return navigationItemSelected(menuItem);
+            }
+        });
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        //To open the message fragment at the start of the app
+        if (savedInstanceState == null) {
+            // TODO set the manual fragment
+            actionBar.setTitle(R.string.nav_manual);
+            navigationView.setCheckedItem(R.id.nav_manual);
+        }
+    }
+
+    private boolean navigationItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.nav_manual:
+                // TODO set the manual fragment
+                actionBar.setTitle(R.string.nav_manual);
+                break;
+            case R.id.nav_alarm:
+                // TODO set the alarm fragment
+                actionBar.setTitle(R.string.nav_alarm);
+                break;
+            case R.id.nav_timer:
+                // TODO set the timer fragment
+                actionBar.setTitle(R.string.nav_timer);
+                break;
+            case R.id.nav_climate:
+                // TODO set the climate fragment
+                actionBar.setTitle(R.string.nav_climate);
+                break;
+            default:
+                break;
+        }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

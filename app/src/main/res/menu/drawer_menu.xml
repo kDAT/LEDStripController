@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_manual"
+            android:icon="@drawable/ic_tune_black_24dp"
+            android:title="@string/nav_manual" />
+        <item
+            android:id="@+id/nav_alarm"
+            android:icon="@drawable/ic_alarm_black_24dp"
+            android:title="@string/nav_alarm" />
+        <item
+            android:id="@+id/nav_timer"
+            android:icon="@drawable/ic_timer_black_24dp"
+            android:title="@string/nav_timer" />
+        <item
+            android:id="@+id/nav_climate"
+            android:icon="@drawable/ic_cloud_black_24dp"
+            android:title="@string/nav_climate" />
+    </group>
+
+</menu>

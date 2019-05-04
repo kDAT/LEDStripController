@@ -428,15 +428,15 @@ public class MainActivity extends AppCompatActivity {
                 actionBar.setTitle(R.string.nav_manual);
                 break;
             case R.id.nav_alarm:
-                // TODO set the alarm fragment
+                fragmentTransaction.replace(R.id.fragment_container, AlarmFragment.newInstance(), FRAG_ALARM).commit();
                 actionBar.setTitle(R.string.nav_alarm);
                 break;
             case R.id.nav_timer:
-                // TODO set the timer fragment
+                fragmentTransaction.replace(R.id.fragment_container, TimerFragment.newInstance(), FRAG_TIMER).commit();
                 actionBar.setTitle(R.string.nav_timer);
                 break;
             case R.id.nav_climate:
-                // TODO set the climate fragment
+                fragmentTransaction.replace(R.id.fragment_container, ClimateFragment.newInstance(), FRAG_CLIMATE).commit();
                 actionBar.setTitle(R.string.nav_climate);
                 break;
             default:

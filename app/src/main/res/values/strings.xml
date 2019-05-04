@@ -17,4 +17,6 @@
     <string name="nav_alarm">Alarm</string>
     <string name="nav_timer">Timer</string>
     <string name="nav_climate">Climate</string>
+    <string name="tab_title_static">Static</string>
+    <string name="tab_title_dynamic">Dynamic</string>
 </resources>

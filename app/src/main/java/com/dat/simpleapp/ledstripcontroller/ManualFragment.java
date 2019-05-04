@@ -50,10 +50,8 @@ public class ManualFragment extends Fragment {
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager){
         Adapter adapter = new Adapter(getChildFragmentManager());
-        // TODO adapter.addFragment(new nameOfFragment(), "title");
-        adapter.addFragment(StaticFragment.newInstance(), "Static");
-        adapter.addFragment(DynamicFragment.newInstance(), "Dynamic");
-        // TODO add strings to string file
+        adapter.addFragment(StaticFragment.newInstance(), getString(R.string.tab_title_static));
+        adapter.addFragment(DynamicFragment.newInstance(), getString(R.string.tab_title_dynamic));
         viewPager.setAdapter(adapter);
     }
 

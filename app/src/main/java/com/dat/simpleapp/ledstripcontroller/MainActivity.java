@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.ParcelUuid;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +20,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     Mode alarmMode;
     Mode climateMode;
 
-    private int mDefaultStripSize = 30;
     private int mStripSize;
+    public static final int DEF_STRIP_SIZE = 30;
     public static final String MY_PREFS_FILE = "My_Preferences_File";
     public static final String STRIP_SIZE = "Strip_Size";
     public static final String BUNDLE_STATIC = "Bundle_Static";
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Strip size with SharedPreferences
         SharedPreferences stripSize = getSharedPreferences(MY_PREFS_FILE, Context.MODE_PRIVATE);
-        mStripSize = stripSize.getInt(STRIP_SIZE, mDefaultStripSize);
+        mStripSize = stripSize.getInt(STRIP_SIZE, DEF_STRIP_SIZE);
 
         // Creates the objects of each mode
         setupModes(savedInstanceState);
@@ -265,9 +265,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateStripSize() {
-        // Updates the strip size
         final SharedPreferences stripSize = getSharedPreferences(MY_PREFS_FILE, Context.MODE_PRIVATE);
-        mStripSize = stripSize.getInt(STRIP_SIZE, mDefaultStripSize);
+        mStripSize = stripSize.getInt(STRIP_SIZE, DEF_STRIP_SIZE);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.number_picker, null);
@@ -300,8 +299,17 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void updateFragments(){
-        // TODO update the strip size to the fragments
+    public void updateFragments() {
+        ManualFragment fragment = (ManualFragment) getSupportFragmentManager().findFragmentByTag(FRAG_MANUAL);
+        if (fragment != null && fragment.isVisible()){
+            fragment.setStripSize(mStripSize);
+            Log.d(TAG, "updateFragments: stripSize in manual fragment updated");
+        }
+        staticMode.setStripSize(mStripSize);
+        dynamicMode.setStripSize(mStripSize);
+        alarmMode.setStripSize(mStripSize);
+        timerMode.setStripSize(mStripSize);
+        climateMode.setStripSize(mStripSize);
     }
 
     @Override
@@ -414,7 +422,8 @@ public class MainActivity extends AppCompatActivity {
         //To open the message fragment at the start of the app
         if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, ManualFragment.newInstance(), FRAG_MANUAL).commit();
+            fragmentTransaction.replace(R.id.fragment_container, ManualFragment
+                    .newInstance(staticMode, dynamicMode), FRAG_MANUAL).commit();
             actionBar.setTitle(R.string.nav_manual);
             navigationView.setCheckedItem(R.id.nav_manual);
         }
@@ -424,7 +433,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (menuItem.getItemId()) {
             case R.id.nav_manual:
-                fragmentTransaction.replace(R.id.fragment_container, ManualFragment.newInstance(), FRAG_MANUAL).commit();
+                fragmentTransaction.replace(R.id.fragment_container, ManualFragment
+                        .newInstance(staticMode, dynamicMode), FRAG_MANUAL).commit();
                 actionBar.setTitle(R.string.nav_manual);
                 break;
             case R.id.nav_alarm:

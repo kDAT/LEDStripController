@@ -20,4 +20,8 @@ public class Mode {
         mBytes = bytes;
         if (send) mBluetoothConnectionService.write(bytes);
     }
+
+    public void setStripSize(int stripSize){
+        mBytes[15] = (byte) stripSize;
+    }
 }

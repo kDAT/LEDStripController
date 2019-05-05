@@ -21,20 +21,36 @@ import java.util.List;
 
 public class ManualFragment extends Fragment {
 
+    Mode mStaticMode;
+    Mode mDynamicMode;
+    StaticFragment mStaticFragment;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
 
-    public static ManualFragment newInstance() {
-        return new ManualFragment();
+    public static ManualFragment newInstance(Mode staticMode, Mode dynamicMode) {
+        ManualFragment fragment = new ManualFragment();
+        fragment.setModes(staticMode, dynamicMode);
+        return fragment;
+    }
+
+    public void setModes(Mode staticMode, Mode dynamicMode){
+        mStaticMode = staticMode;
+        mDynamicMode = dynamicMode;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_manual, container, false);
+        return inflater.inflate(R.layout.fragment_manual, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Setting ViewPager for each Tabs
         ViewPager viewPager = view.findViewById(R.id.view_pager);
@@ -43,14 +59,13 @@ public class ManualFragment extends Fragment {
         // Set Tabs inside Toolbar
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-
-        return view;
     }
 
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager){
+        mStaticFragment = StaticFragment.newInstance(mStaticMode);
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(StaticFragment.newInstance(), getString(R.string.tab_title_static));
+        adapter.addFragment(mStaticFragment, getString(R.string.tab_title_static));
         adapter.addFragment(DynamicFragment.newInstance(), getString(R.string.tab_title_dynamic));
         viewPager.setAdapter(adapter);
     }
@@ -83,5 +98,9 @@ public class ManualFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    public void setStripSize(int stripSize){
+        mStaticFragment.setStripSize(stripSize);
     }
 }

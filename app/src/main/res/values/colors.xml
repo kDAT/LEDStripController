@@ -6,4 +6,6 @@
 
     <color name="colorDat">#FD6D07</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorLightGray">#A5A5A5</color>
+    <color name="colorClearGray">#BBBBBB</color>
 </resources>

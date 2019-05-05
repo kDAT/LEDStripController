@@ -5,6 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.appyvet.materialrangebar.RangeBar
+        android:id="@+id/static_range"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mrb_barWeight="8dp"
+        app:mrb_connectingLineColor="@android:color/white"
+        app:mrb_connectingLineWeight="4dp"
+        app:mrb_onlyOnDrag="false"
+        app:mrb_pinColor="@color/colorTransparent"
+        app:mrb_pinTextColor="@color/colorTransparent"
+        app:mrb_rangeBar="true"
+        app:mrb_rangeBarColor="@color/colorLightGray"
+        app:mrb_rangeBarPaddingBottom="12dp"
+        app:mrb_rangeBar_rounded="true"
+        app:mrb_selectorBoundaryColor="@color/colorLightGray"
+        app:mrb_selectorBoundarySize="1dp"
+        app:mrb_selectorColor="@android:color/white"
+        app:mrb_selectorSize="11dp"
+        app:mrb_tickColor="@color/colorTransparent"
+        app:mrb_tickEnd="30"
+        app:mrb_tickStart="1" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -15,4 +43,107 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/range_left_text"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="30"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/range_left_prev"
+        app:layout_constraintStart_toEndOf="@+id/range_left_prev"
+        app:layout_constraintTop_toTopOf="@+id/range_left_prev" />
+
+    <ImageView
+        android:id="@+id/range_right_last"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="@+id/static_range"
+        app:layout_constraintTop_toTopOf="@+id/static_range"
+        app:srcCompat="@drawable/ic_last_page_black_24dp" />
+
+    <ImageView
+        android:id="@+id/range_right_next"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/range_right_last"
+        app:layout_constraintEnd_toStartOf="@+id/range_right_last"
+        app:layout_constraintTop_toTopOf="@+id/range_right_last"
+        app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+
+    <TextView
+        android:id="@+id/range_right_text"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="255"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/range_right_next"
+        app:layout_constraintEnd_toStartOf="@+id/range_right_next"
+        app:layout_constraintTop_toTopOf="@+id/range_right_next" />
+
+    <ImageView
+        android:id="@+id/range_right_prev"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/range_right_text"
+        app:layout_constraintEnd_toStartOf="@+id/range_right_text"
+        app:layout_constraintTop_toTopOf="@+id/range_right_text"
+        app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+    <ImageView
+        android:id="@+id/range_right_first"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/range_right_prev"
+        app:layout_constraintEnd_toStartOf="@+id/range_right_prev"
+        app:layout_constraintTop_toTopOf="@+id/range_right_prev"
+        app:srcCompat="@drawable/ic_first_page_black_24dp" />
+
+    <ImageView
+        android:id="@+id/range_left_first"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="@+id/static_range"
+        app:layout_constraintTop_toTopOf="@+id/static_range"
+        app:srcCompat="@drawable/ic_first_page_black_24dp" />
+
+    <ImageView
+        android:id="@+id/range_left_prev"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/range_left_first"
+        app:layout_constraintStart_toEndOf="@+id/range_left_first"
+        app:layout_constraintTop_toTopOf="@+id/range_left_first"
+        app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+    <ImageView
+        android:id="@+id/range_left_next"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/range_left_text"
+        app:layout_constraintStart_toEndOf="@+id/range_left_text"
+        app:layout_constraintTop_toTopOf="@+id/range_left_text"
+        app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+
+    <ImageView
+        android:id="@+id/range_left_last"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/range_left_next"
+        app:layout_constraintStart_toEndOf="@+id/range_left_next"
+        app:layout_constraintTop_toTopOf="@+id/range_left_next"
+        app:srcCompat="@drawable/ic_last_page_black_24dp" />
+
 </android.support.constraint.ConstraintLayout>

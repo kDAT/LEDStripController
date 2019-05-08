@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorClearGray"
+    android:fitsSystemWindows="true">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:gravity="center"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/color_red"
+            style="@style/ColorPicker"
+            android:src="@color/colorRed" />
+
+        <ImageView
+            android:id="@+id/color_yellow"
+            style="@style/ColorPicker"
+            android:src="@color/colorYellow" />
+
+        <ImageView
+            android:id="@+id/color_green"
+            style="@style/ColorPicker"
+            android:src="@color/colorGreen" />
+
+
+        <ImageView
+            android:id="@+id/color_light_blue"
+            style="@style/ColorPicker"
+            android:src="@color/colorLightBlue" />
+
+        <ImageView
+            android:id="@+id/color_blue"
+            style="@style/ColorPicker"
+            android:src="@color/colorBlue" />
+
+        <ImageView
+            android:id="@+id/color_pink"
+            style="@style/ColorPicker"
+            android:src="@color/colorPink" />
+
+
+        <ImageView
+            android:id="@+id/color_white"
+            style="@style/ColorPicker"
+            android:src="@color/colorWhite" />
+
+        <ImageView
+            android:id="@+id/color_dat"
+            style="@style/ColorPicker"
+            android:src="@color/colorDat" />
+
+        <ImageView
+            android:id="@+id/color_purple"
+            style="@style/ColorPicker"
+            android:src="@color/colorPurple" />
+
+    </GridLayout>
+</android.support.constraint.ConstraintLayout>

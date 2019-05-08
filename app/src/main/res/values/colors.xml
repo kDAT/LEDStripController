@@ -7,5 +7,13 @@
     <color name="colorDat">#FD6D07</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorLightGray">#A5A5A5</color>
-    <color name="colorClearGray">#BBBBBB</color>
+    <color name="colorClearGray">#DDDDDD</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorRed">#F00</color>
+    <color name="colorGreen">#0F0</color>
+    <color name="colorBlue">#00F</color>
+    <color name="colorYellow">#FF0</color>
+    <color name="colorLightBlue">#08F</color>
+    <color name="colorPink">#F08</color>
+    <color name="colorPurple">#80F</color>
 </resources>

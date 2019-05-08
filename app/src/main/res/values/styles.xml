@@ -15,4 +15,10 @@
         <item name="android:statusBarColor">#000</item>
     </style>
 
+    <style name="ColorPicker">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
 </resources>

@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -32,17 +33,6 @@
         app:mrb_tickColor="@color/colorTransparent"
         app:mrb_tickEnd="30"
         app:mrb_tickStart="1" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Static"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/range_left_text"
@@ -145,5 +135,202 @@
         app:layout_constraintStart_toEndOf="@+id/range_left_next"
         app:layout_constraintTop_toTopOf="@+id/range_left_next"
         app:srcCompat="@drawable/ic_last_page_black_24dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/color_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/button_select_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/static_range"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <com.appyvet.materialrangebar.RangeBar
+            android:id="@+id/bar_red"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/bar_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mrb_barWeight="8dp"
+            app:mrb_connectingLineColor="@color/colorRed"
+            app:mrb_connectingLineWeight="4dp"
+            app:mrb_onlyOnDrag="false"
+            app:mrb_pinColor="@color/colorTransparent"
+            app:mrb_pinTextColor="@color/colorTransparent"
+            app:mrb_rangeBar="false"
+            app:mrb_rangeBarColor="@color/colorLightGray"
+            app:mrb_rangeBarPaddingBottom="12dp"
+            app:mrb_rangeBar_rounded="true"
+            app:mrb_selectorBoundaryColor="@color/colorLightGray"
+            app:mrb_selectorBoundarySize="1dp"
+            app:mrb_selectorColor="@android:color/white"
+            app:mrb_selectorSize="11dp"
+            app:mrb_tickColor="@color/colorTransparent"
+            app:mrb_tickEnd="255"
+            app:mrb_tickStart="0" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:gravity="bottom"
+            android:text="@string/static_red"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/bar_red"
+            app:layout_constraintStart_toStartOf="@id/bar_red"
+            app:layout_constraintTop_toTopOf="@+id/bar_red" />
+
+
+        <com.appyvet.materialrangebar.RangeBar
+            android:id="@+id/bar_green"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/bar_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_red"
+            app:mrb_barWeight="8dp"
+            app:mrb_connectingLineColor="@color/colorGreen"
+            app:mrb_connectingLineWeight="4dp"
+            app:mrb_onlyOnDrag="false"
+            app:mrb_pinColor="@color/colorTransparent"
+            app:mrb_pinTextColor="@color/colorTransparent"
+            app:mrb_rangeBar="false"
+            app:mrb_rangeBarColor="@color/colorLightGray"
+            app:mrb_rangeBarPaddingBottom="12dp"
+            app:mrb_rangeBar_rounded="true"
+            app:mrb_selectorBoundaryColor="@color/colorLightGray"
+            app:mrb_selectorBoundarySize="1dp"
+            app:mrb_selectorColor="@android:color/white"
+            app:mrb_selectorSize="11dp"
+            app:mrb_tickColor="@color/colorTransparent"
+            app:mrb_tickEnd="255"
+            app:mrb_tickStart="0" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:gravity="bottom"
+            android:text="@string/static_green"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/bar_green"
+            app:layout_constraintStart_toStartOf="@+id/bar_green"
+            app:layout_constraintTop_toTopOf="@+id/bar_green" />
+
+        <com.appyvet.materialrangebar.RangeBar
+            android:id="@+id/bar_blue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/bar_brightness"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_green"
+            app:mrb_barWeight="8dp"
+            app:mrb_connectingLineColor="@color/colorBlue"
+            app:mrb_connectingLineWeight="4dp"
+            app:mrb_onlyOnDrag="false"
+            app:mrb_pinColor="@color/colorTransparent"
+            app:mrb_pinTextColor="@color/colorTransparent"
+            app:mrb_rangeBar="false"
+            app:mrb_rangeBarColor="@color/colorLightGray"
+            app:mrb_rangeBarPaddingBottom="12dp"
+            app:mrb_rangeBar_rounded="true"
+            app:mrb_selectorBoundaryColor="@color/colorLightGray"
+            app:mrb_selectorBoundarySize="1dp"
+            app:mrb_selectorColor="@android:color/white"
+            app:mrb_selectorSize="11dp"
+            app:mrb_tickColor="@color/colorTransparent"
+            app:mrb_tickEnd="255"
+            app:mrb_tickStart="0" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:gravity="bottom"
+            android:text="@string/static_blue"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/bar_blue"
+            app:layout_constraintStart_toStartOf="@+id/bar_blue"
+            app:layout_constraintTop_toTopOf="@id/bar_blue" />
+
+        <com.appyvet.materialrangebar.RangeBar
+            android:id="@+id/bar_brightness"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_blue"
+            app:mrb_barWeight="8dp"
+            app:mrb_connectingLineColor="@android:color/white"
+            app:mrb_connectingLineWeight="4dp"
+            app:mrb_onlyOnDrag="false"
+            app:mrb_pinColor="@color/colorTransparent"
+            app:mrb_pinTextColor="@color/colorTransparent"
+            app:mrb_rangeBar="false"
+            app:mrb_rangeBarColor="@color/colorLightGray"
+            app:mrb_rangeBarPaddingBottom="12dp"
+            app:mrb_rangeBar_rounded="true"
+            app:mrb_selectorBoundaryColor="@color/colorLightGray"
+            app:mrb_selectorBoundarySize="1dp"
+            app:mrb_selectorColor="@android:color/white"
+            app:mrb_selectorSize="11dp"
+            app:mrb_tickColor="@color/colorTransparent"
+            app:mrb_tickEnd="255"
+            app:mrb_tickStart="0" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:gravity="bottom"
+            android:text="@string/static_brightness"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/bar_brightness"
+            app:layout_constraintStart_toStartOf="@+id/bar_brightness"
+            app:layout_constraintTop_toTopOf="@+id/bar_brightness" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button_select_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/color_preset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_clear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/color_layout" />
+
+    <Button
+        android:id="@+id/button_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_select_color"
+        app:layout_constraintTop_toBottomOf="@+id/color_layout"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="573dp" />
 
 </android.support.constraint.ConstraintLayout>

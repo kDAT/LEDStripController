@@ -37,7 +37,7 @@ public class ManualFragment extends Fragment {
         return fragment;
     }
 
-    public void setModes(Mode staticMode, Mode dynamicMode){
+    public void setModes(Mode staticMode, Mode dynamicMode) {
         mStaticMode = staticMode;
         mDynamicMode = dynamicMode;
     }
@@ -62,15 +62,15 @@ public class ManualFragment extends Fragment {
     }
 
     // Add Fragments to Tabs
-    private void setupViewPager(ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager) {
         mStaticFragment = StaticFragment.newInstance(mStaticMode);
         Adapter adapter = new Adapter(getChildFragmentManager());
         adapter.addFragment(mStaticFragment, getString(R.string.tab_title_static));
-        adapter.addFragment(DynamicFragment.newInstance(), getString(R.string.tab_title_dynamic));
+        adapter.addFragment(DynamicFragment.newInstance(mDynamicMode), getString(R.string.tab_title_dynamic));
         viewPager.setAdapter(adapter);
     }
 
-    static class Adapter extends FragmentPagerAdapter{
+    static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
@@ -100,7 +100,7 @@ public class ManualFragment extends Fragment {
         }
     }
 
-    public void setStripSize(int stripSize){
+    public void setStripSize(int stripSize) {
         mStaticFragment.setStripSize(stripSize);
     }
 }

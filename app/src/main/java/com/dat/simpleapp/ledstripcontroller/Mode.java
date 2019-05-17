@@ -1,5 +1,7 @@
 package com.dat.simpleapp.ledstripcontroller;
 
+import android.util.Log;
+
 public class Mode {
 
     private static final String TAG = "Mode";
@@ -19,9 +21,10 @@ public class Mode {
     public void setBytes(byte[] bytes, boolean send) {
         mBytes = bytes;
         if (send) mBluetoothConnectionService.write(bytes);
+        Log.d(TAG, "setBytes: Mode:" + bytes[0] + "\tSend:" + send);
     }
 
-    public void setStripSize(int stripSize){
+    public void setStripSize(int stripSize) {
         mBytes[15] = (byte) stripSize;
     }
 }

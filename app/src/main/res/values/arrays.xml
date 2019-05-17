@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="waves">
+        <item>@drawable/wave_0</item>
+        <item>@drawable/wave_1</item>
+        <item>@drawable/wave_2</item>
+        <item>@drawable/wave_3</item>
+        <item>@drawable/wave_4</item>
+        <item>@drawable/wave_5</item>
+        <item>@drawable/wave_6</item>
+        <item>@drawable/wave_0_i</item>
+        <item>@drawable/wave_1_i</item>
+        <item>@drawable/wave_2_i</item>
+        <item>@drawable/wave_3_i</item>
+        <item>@drawable/wave_4_i</item>
+        <item>@drawable/wave_5_i</item>
+        <item>@drawable/wave_6_i</item>
+    </array>
+</resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -137,7 +136,7 @@
         app:srcCompat="@drawable/ic_last_page_black_24dp" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/color_layout"
+        android:id="@+id/color_static_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/button_select_color"
@@ -145,7 +144,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/static_range"
         app:layout_constraintVertical_bias="0.0">
-
 
         <com.appyvet.materialrangebar.RangeBar
             android:id="@+id/bar_red"
@@ -180,13 +178,12 @@
             android:layout_height="45dp"
             android:clickable="true"
             android:gravity="bottom"
-            android:text="@string/static_red"
+            android:text="@string/bar_red"
             android:textAllCaps="true"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/bar_red"
             app:layout_constraintStart_toStartOf="@id/bar_red"
             app:layout_constraintTop_toTopOf="@+id/bar_red" />
-
 
         <com.appyvet.materialrangebar.RangeBar
             android:id="@+id/bar_green"
@@ -222,7 +219,7 @@
             android:layout_marginTop="8dp"
             android:clickable="true"
             android:gravity="bottom"
-            android:text="@string/static_green"
+            android:text="@string/bar_green"
             android:textAllCaps="true"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/bar_green"
@@ -262,7 +259,7 @@
             android:layout_height="45dp"
             android:clickable="true"
             android:gravity="bottom"
-            android:text="@string/static_blue"
+            android:text="@string/bar_blue"
             android:textAllCaps="true"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/bar_blue"
@@ -302,7 +299,7 @@
             android:layout_height="45dp"
             android:clickable="true"
             android:gravity="bottom"
-            android:text="@string/static_brightness"
+            android:text="@string/bar_brightness"
             android:textAllCaps="true"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/bar_brightness"
@@ -319,7 +316,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_clear"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/color_static_layout" />
 
     <Button
         android:id="@+id/button_clear"
@@ -329,8 +326,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_select_color"
-        app:layout_constraintTop_toBottomOf="@+id/color_layout"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="573dp" />
+        app:layout_constraintTop_toBottomOf="@+id/color_static_layout" />
 
 </android.support.constraint.ConstraintLayout>

@@ -20,10 +20,13 @@
     <string name="tab_title_static">Static</string>
     <string name="tab_title_dynamic">Dynamic</string>
     <string name="color_dialog_title">Select a color</string>
-    <string name="static_red">red</string>
-    <string name="static_green">green</string>
-    <string name="static_blue">blue</string>
-    <string name="static_brightness">brightness</string>
+    <string name="bar_red">red</string>
+    <string name="bar_green">green</string>
+    <string name="bar_blue">blue</string>
+    <string name="bar_brightness">brightness</string>
     <string name="color_preset">Color Preset</string>
     <string name="button_clear">Clear</string>
+    <string name="switch_invert">Invert</string>
+    <string name="bar_speed">speed</string>
+    <string name="bar_size">size</string>
 </resources>

@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ public class ManualFragment extends Fragment {
     public void setModes(Mode staticMode, Mode dynamicMode) {
         mStaticMode = staticMode;
         mDynamicMode = dynamicMode;
+        // Send the static on start
+        mStaticMode.setBytes(mStaticMode.getBytes(), true);
     }
 
     @Nullable
@@ -68,6 +71,22 @@ public class ManualFragment extends Fragment {
         adapter.addFragment(mStaticFragment, getString(R.string.tab_title_static));
         adapter.addFragment(DynamicFragment.newInstance(mDynamicMode), getString(R.string.tab_title_dynamic));
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                // Send when the Page changes
+                if (i == 0) mStaticMode.setBytes(mStaticMode.getBytes(), true);
+                else mDynamicMode.setBytes(mDynamicMode.getBytes(), true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+            }
+        });
     }
 
     static class Adapter extends FragmentPagerAdapter {

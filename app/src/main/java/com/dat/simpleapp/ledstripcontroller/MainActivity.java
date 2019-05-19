@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             //Static mode
             bytesStatic[0] = (byte) 1;             // Mode static
-            bytesStatic[1] = (byte) 255;           // Bright 0-255
+            bytesStatic[1] = (byte) 255;           // Brightness 0-255
             bytesStatic[2] = (byte) 1;             // Start Position 1-stripSize
             bytesStatic[3] = (byte) mStripSize;    // End Position 1-stripSize
             bytesStatic[4] = (byte) 0;             // Red 0-255
@@ -349,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Dynamic Mode
             bytesDynamic[0] = (byte) 2;             // Mode dynamic
-            bytesDynamic[1] = (byte) 255;           // Bright 0-255
+            bytesDynamic[1] = (byte) 255;           // Brightness 0-255
             bytesDynamic[2] = (byte) 176;           // Speed 0-255
             bytesDynamic[3] = (byte) 0;             // Wave type 0-6
             bytesDynamic[4] = (byte) 255;           // Width 0-255
@@ -361,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Alarm Mode
             bytesAlarm[0] = (byte) 4;             // Mode alarm
-            bytesAlarm[1] = (byte) 255;           // Bright 0-255
+            bytesAlarm[1] = (byte) 255;           // Brightness 0-255
             bytesAlarm[2] = (byte) 0;             // Current hour 0-23
             bytesAlarm[3] = (byte) 0;             // Current minute 0-59
             bytesAlarm[4] = (byte) 0;             // Current second 0-59
@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Timer Mode
             bytesTimer[0] = (byte) 5;             // Mode alarm
-            bytesTimer[1] = (byte) 255;           // Bright 0-255
+            bytesTimer[1] = (byte) 255;           // Brightness 0-255
             bytesTimer[2] = (byte) 0;             // Hours 0-99
             bytesTimer[3] = (byte) 1;             // Minutes 0-59
             bytesTimer[4] = (byte) 0;             // Seconds 0-59
